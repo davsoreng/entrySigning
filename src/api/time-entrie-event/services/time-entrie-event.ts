@@ -370,13 +370,15 @@ export default factories.createCoreService(db_key, ({ strapi }) => ({
       );
     }
   },
-  async obternerTEEbyTE(id) {
+  async obtenerTEEbyTE(documentId : string) {
     try {
       const entrie = await strapi.documents(db_key).findMany({
-        filters: {
-          time_entrie: id,
-        },
         fields: ["id", "documentId", "event_type", "event_at"],
+        filters: {
+          time_entrie : {
+            documentId
+          }
+        },
         populate: {
           time_entrie: {
             fields: ["id", "documentId"],
@@ -396,6 +398,7 @@ export default factories.createCoreService(db_key, ({ strapi }) => ({
           },
         },
       });
+      return entrie;
     } catch (error) {
       if (
         error instanceof ValidationError ||
