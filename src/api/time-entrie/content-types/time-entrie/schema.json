@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "time_entries",
+  "info": {
+    "singularName": "time-entrie",
+    "pluralName": "time-entries",
+    "displayName": "time-entrie"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "work_date": {
+      "type": "date"
+    },
+    "entry_status": {
+      "type": "enumeration",
+      "default": "active",
+      "enum": [
+        "active",
+        "paused",
+        "completed"
+      ]
+    },
+    "started_at": {
+      "type": "datetime",
+      "required": true
+    },
+    "ended_at": {
+      "type": "datetime"
+    },
+    "organization_member": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::organization-member.organization-member",
+      "inversedBy": "time_entries"
+    },
+    "time_entrie_events": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::time-entrie-event.time-entrie-event",
+      "mappedBy": "time_entrie"
+    }
+  }
+}

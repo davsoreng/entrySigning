@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organization_members",
+  "info": {
+    "singularName": "organization-member",
+    "pluralName": "organization-members",
+    "displayName": "organization-member"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "role": {
+      "type": "enumeration",
+      "required": false,
+      "default": "employee",
+      "enum": [
+        "employee",
+        "admin"
+      ]
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "organization_members"
+    },
+    "organization": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::organization.organization",
+      "inversedBy": "organization_members"
+    },
+    "time_entries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::time-entrie.time-entrie",
+      "mappedBy": "organization_member"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "time_entrie_events",
+  "info": {
+    "singularName": "time-entrie-event",
+    "pluralName": "time-entrie-events",
+    "displayName": "time-entrie-event"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "time_entrie": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::time-entrie.time-entrie",
+      "inversedBy": "time_entrie_events"
+    },
+    "event_type": {
+      "type": "enumeration",
+      "enum": [
+        "start",
+        "pause",
+        "resume",
+        "end"
+      ]
+    },
+    "event_at": {
+      "type": "datetime"
+    }
+  }
+}
