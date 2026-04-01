@@ -35,7 +35,7 @@ export default factories.createCoreController(db_key, ({ strapi }) => ({
       });
     }
   },
-  async createTimeEntries(ctx) {
+  /* async createTimeEntries(ctx) {
     try {
       const {
         work_date,
@@ -63,7 +63,7 @@ export default factories.createCoreController(db_key, ({ strapi }) => ({
         error: error.message,
       });
     }
-  },
+  }, */
   async getTimeEntriesByMember(ctx) {
     try {
       const { id } = ctx.params;

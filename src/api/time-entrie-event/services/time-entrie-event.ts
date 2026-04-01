@@ -91,6 +91,23 @@ export default factories.createCoreService(db_key, ({ strapi }) => ({
         throw new ValidationError("Entry_status requerida");
       }
 
+      const itsActive = await strapi
+        .documents("api::time-entrie.time-entrie")
+        .findFirst({
+          filters : {
+            organization_member : {
+              documentId : te.organization_member
+            },
+            entry_status : "active"
+          }
+        });
+
+      if (itsActive) {
+        throw new ValidationError(
+          "No se puede iniciar una nueva jornada, ya existe una activa.",
+        );
+      }
+      
       const entrie = await strapi
         .documents("api::time-entrie.time-entrie")
         .create({
@@ -272,11 +289,11 @@ export default factories.createCoreService(db_key, ({ strapi }) => ({
         return updated;
       } else if (entrie.entry_status === "active") {
         throw new ValidationError(
-          "No se puede activar, ya no se encuentra en pausa.",
+          "No se puede activar, no se encuentra en pausa.",
         );
       } else if (entrie.entry_status === "completed") {
         throw new ValidationError(
-          "No se puede reaunudar, ya está completada la jornada.",
+          "No se puede reaunudar, está completada la jornada.",
         );
       }
 
@@ -341,7 +358,7 @@ export default factories.createCoreService(db_key, ({ strapi }) => ({
 
         await strapi.documents(db_key).create({
           data: {
-            time_entrie: entrie.documentId,
+            time_entrie: updated.documentId,
             event_type: "end",
             event_at: new Date(),
           },
@@ -353,7 +370,7 @@ export default factories.createCoreService(db_key, ({ strapi }) => ({
         );
       } else if (entrie.entry_status === "completed") {
         throw new ValidationError(
-          "No se puede completar, ya está completada la jornada.",
+          "No se puede completar, la jornada yaestá completada.",
         );
       }
 

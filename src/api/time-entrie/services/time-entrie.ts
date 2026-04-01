@@ -82,7 +82,7 @@ export default factories.createCoreService(db_key, ({ strapi }) => ({
       throw error;
     }
   },
-  async crear(a: TimeEntrie) {
+  /* async crear(a: TimeEntrie) {
     try {
       if (isNaN(new Date(a.work_date).getTime())) {
         throw new Error("WorkDate requerido");
@@ -133,7 +133,7 @@ export default factories.createCoreService(db_key, ({ strapi }) => ({
       console.error("Error al crear producto:", error);
       throw error;
     }
-  },
+  }, */
   async obtenerPorOrg(documentId: string) {
     try {
       const organization = await strapi.documents(db_key).findMany({

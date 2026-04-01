@@ -15,7 +15,7 @@ export default factories.createCoreController(db_key, ({ strapi }) => ({
 
         return ctx.send({
           ok: true,
-          mensaje: "Event Time Entries obtenido correctamente",
+          mensaje: "Event Time Entrie obtenido correctamente",
           datos: organizacion,
         });
       }
@@ -30,7 +30,7 @@ export default factories.createCoreController(db_key, ({ strapi }) => ({
       });
     } catch (error) {
       ctx.throw(500, {
-        mensaje: "Error al obtener los Event Time Entries ",
+        mensaje: "Error al obtener los Event Time Entrie/s ",
         error: error.message,
       });
     }
