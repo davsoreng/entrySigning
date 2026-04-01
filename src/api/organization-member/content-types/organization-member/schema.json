@@ -37,12 +37,6 @@
       "relation": "oneToMany",
       "target": "api::time-entrie.time-entrie",
       "mappedBy": "organization_member"
-    },
-    "shedule": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::shedule.shedule",
-      "inversedBy": "organization_members"
     }
   }
 }

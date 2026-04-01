@@ -430,34 +430,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiDepartamentDepartament extends Struct.CollectionTypeSchema {
-  collectionName: 'departaments';
-  info: {
-    displayName: 'departament';
-    pluralName: 'departaments';
-    singularName: 'departament';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::departament.departament'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    shedule: Schema.Attribute.Relation<'manyToOne', 'api::shedule.shedule'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiOrganizationMemberOrganizationMember
   extends Struct.CollectionTypeSchema {
   collectionName: 'organization_members';
@@ -486,7 +458,6 @@ export interface ApiOrganizationMemberOrganizationMember
     publishedAt: Schema.Attribute.DateTime;
     role: Schema.Attribute.Enumeration<['employee', 'admin']> &
       Schema.Attribute.DefaultTo<'employee'>;
-    shedule: Schema.Attribute.Relation<'manyToOne', 'api::shedule.shedule'>;
     time_entries: Schema.Attribute.Relation<
       'oneToMany',
       'api::time-entrie.time-entrie'
@@ -523,41 +494,6 @@ export interface ApiOrganizationOrganization
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    organization_members: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::organization-member.organization-member'
-    >;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiSheduleShedule extends Struct.CollectionTypeSchema {
-  collectionName: 'shedules';
-  info: {
-    displayName: 'shedule';
-    pluralName: 'shedules';
-    singularName: 'shedule';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    departaments: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::departament.departament'
-    >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::shedule.shedule'
-    > &
-      Schema.Attribute.Private;
     organization_members: Schema.Attribute.Relation<
       'oneToMany',
       'api::organization-member.organization-member'
@@ -1161,10 +1097,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::departament.departament': ApiDepartamentDepartament;
       'api::organization-member.organization-member': ApiOrganizationMemberOrganizationMember;
       'api::organization.organization': ApiOrganizationOrganization;
-      'api::shedule.shedule': ApiSheduleShedule;
       'api::time-entrie-event.time-entrie-event': ApiTimeEntrieEventTimeEntrieEvent;
       'api::time-entrie.time-entrie': ApiTimeEntrieTimeEntrie;
       'plugin::content-releases.release': PluginContentReleasesRelease;
