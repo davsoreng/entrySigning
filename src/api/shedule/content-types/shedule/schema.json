@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shedules",
+  "info": {
+    "singularName": "shedule",
+    "pluralName": "shedules",
+    "displayName": "shedule"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "organization_members": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::organization-member.organization-member",
+      "mappedBy": "shedule"
+    },
+    "departaments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::departament.departament",
+      "mappedBy": "shedule"
+    }
+  }
+}
